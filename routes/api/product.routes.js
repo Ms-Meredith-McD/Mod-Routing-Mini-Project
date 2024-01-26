@@ -2,8 +2,8 @@
 const router = require("express").Router();
 const fs = require('fs');
 
+
 router.get("/products", (req, res) => {
-    console.log(req.database)
     fs.readFile('../../db/products.json', 'utf8', (err, data) => {
         if (err){
             console.error(err);
