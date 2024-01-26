@@ -14,21 +14,21 @@ router.get("/products", (req, res) => {
     })
 })
 
-router.get("/:id", (req, res) => {
-    //...
-})
+// router.get("/:id", (req, res) => {
+//     //...
+// })
 
-router.post("/", (req, res) => {
-    //...
-})
+// router.post("/", (req, res) => {
+//     //...
+// })
 
-router.put("/:id", (req, res) => {
-    //...
-})
+// router.put("/:id", (req, res) => {
+//     //...
+// })
 
-router.delete("/:id", (req, res) => {
-    //...
-})
+// router.delete("/:id", (req, res) => {
+//     //...
+// })
 
 
 
