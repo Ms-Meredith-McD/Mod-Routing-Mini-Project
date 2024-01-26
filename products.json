@@ -1,0 +1,21 @@
+
+
+[
+  {
+    "id": "towels",
+    "name": "fluffy",
+    "price": 25
+  },
+
+  {
+    "id": "apples",
+    "name": "red",
+    "price": 50
+  },
+
+  {
+    "id": "flowers",
+    "name": "roses",
+    "price": 80
+  }
+]
