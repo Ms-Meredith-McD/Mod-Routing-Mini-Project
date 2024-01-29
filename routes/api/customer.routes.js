@@ -1,22 +1,64 @@
 // I'm going to put all my customer routes here
-const router = require("express").Router();
-// injecting in midleware
+
+const router = require('express').Router();
 const verifyCustomer = require("../../middleware/verify-customer")
-const checkId = require("../../middleware/check-id")
+const fs = require('fs');
 
-
-router.get("/id", checkId, (req, res) => {
-    res.json({ status: "21+", proof: req.proof })
+router.get("/", (req, res) => {
+    console.log("is this customer route working? yes")
+    fs.readFile('./db/customers.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+        const customers = JSON.parse(data)
+        res.json(customers);
+    })
 })
 
-router.get("/ok", (req, res) => {
-    res.json({ status: "ok" })
-})
 
-// this is a protected route, the middleware is injected into the middle and it can only happen if the customer is logged in
+// This is a protected route
 router.get("/:id", verifyCustomer, (req, res) => {
-    res.json({ status: "ok", username: req.username })
+    console.log("route for customer by ID")
+    fs.readFile('./db/customers.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+        const customers = JSON.parse(data)
+        const customer = customers.find( customer => customer.id == req.params.id)
+        console.log(customer)
+        res.json(customer);
+    })
 })
+
+router.post("/", (req, res) => {
+    fs.readFile('./db/customers.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+        const customers = JSON.parse(data)
+        customers.push(req.body)
+        fs.writeFile('./db/customers.json', JSON.stringify(customers), (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: 'Internal server error' });
+            } else {
+                return res.status(200).json( customers )
+            }
+        })
+})
+})
+
+router.put("/:id", (req, res) => {
+    //...
+})
+
+router.delete("/:id", (req, res) => {
+    //...
+})
+
 
 module.exports = router;
 

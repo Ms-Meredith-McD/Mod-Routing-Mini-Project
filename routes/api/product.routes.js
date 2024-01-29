@@ -3,20 +3,30 @@ const router = require("express").Router();
 const fs = require('fs');
 
 
-router.get("/products", (req, res) => {
-    fs.readFile('../../db/products.json', 'utf8', (err, data) => {
-        if (err){
+router.get("/", (req, res) => {
+    console.log("is this route working? yes")
+    fs.readFile('./db/products.json', 'utf8', (err, data) => {
+        if (err) {
             console.error(err);
-            return res.status(500).json({error: 'Internal server error'});
+            return res.status(500).json({ error: 'Internal server error' });
         }
         const products = JSON.parse(data)
         res.json(products);
     })
 })
 
-// router.get("/:id", (req, res) => {
-//     //...
-// })
+router.get("/:id", (req, res) => {
+    console.log("route for product by ID")
+    fs.readFile('./db/products.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+        const products = JSON.parse(data)
+        const product = products.find( product => product.id === req.params.id)
+        res.json(product);
+    })
+})
 
 // router.post("/", (req, res) => {
 //     //...
