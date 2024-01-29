@@ -16,7 +16,6 @@
      - Send in a new customer record via POST api call 
          - fs.writeFile
      - Update the array 
-         -put
      - Use fs.writeFile to create a new customers.json file wih the new data
 
   - OPTIONAL -
