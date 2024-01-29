@@ -4,6 +4,7 @@ const router = require('express').Router();
 const verifyCustomer = require("../../middleware/verify-customer")
 const fs = require('fs');
 
+// see all customers
 router.get("/", (req, res) => {
     console.log("is this customer route working? yes")
     fs.readFile('./db/customers.json', 'utf8', (err, data) => {
@@ -31,7 +32,7 @@ router.get("/:id", verifyCustomer, (req, res) => {
         res.json(customer);
     })
 })
-
+// add a customer
 router.post("/", (req, res) => {
     fs.readFile('./db/customers.json', 'utf8', (err, data) => {
         if (err) {

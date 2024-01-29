@@ -2,7 +2,7 @@
 const router = require("express").Router();
 const fs = require('fs');
 
-
+// see all products
 router.get("/", (req, res) => {
     console.log("is this route working? yes")
     fs.readFile('./db/products.json', 'utf8', (err, data) => {
@@ -15,6 +15,7 @@ router.get("/", (req, res) => {
     })
 })
 
+// find a product by id
 router.get("/:id", (req, res) => {
     console.log("route for product by ID")
     fs.readFile('./db/products.json', 'utf8', (err, data) => {
